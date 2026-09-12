@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Farm Direct AI</title>
+<style>
+:root{--g:#166534;--g2:#15803d;--p:#f0fdf4;--m:#dcfce7;--ink:#102a1a;--muted:#64748b;--line:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;font-family:Segoe UI,Arial,sans-serif;background:#f6faf7;color:var(--ink)}
+button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.top{height:72px;background:white;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 4%;position:sticky;top:0;z-index:10}.brand{display:flex;gap:10px;align-items:center;cursor:pointer}.logo{width:42px;height:42px;border-radius:13px;background:var(--p);display:grid;place-items:center;font-size:24px}.brand b{font-size:19px}.brand b span{color:var(--g2)}.sub{font-size:10px;color:var(--muted)}.actions{display:flex;gap:8px;align-items:center}.role{padding:8px 12px;background:var(--m);color:var(--g);border-radius:99px;font-size:12px;font-weight:700}.icon{width:40px;height:40px;border-radius:11px;background:var(--p)}
+#app{max-width:1180px;margin:auto;padding:30px 20px 90px}.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:25px;align-items:center;padding:35px 0}.hero h1{font-size:clamp(40px,6vw,68px);line-height:1;margin:15px 0}.hero h1 span{color:var(--g2)}p{line-height:1.6;color:var(--muted)}.hero-card{background:linear-gradient(135deg,#14532d,#15803d);color:white;border-radius:28px;padding:28px;min-height:330px;display:flex;flex-direction:column;justify-content:space-between}.hero-card p{color:#dcfce7}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{background:#ffffff1f;padding:13px;border-radius:14px}.stat b{display:block;font-size:20px}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 7px 25px #0f172a08}.grid{display:grid;gap:18px}.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.btn{padding:12px 17px;border-radius:12px;font-weight:750}.primary{background:var(--g2);color:white}.dark{background:#0f172a;color:white}.light{background:white;border:1px solid var(--line)}.danger{background:#fee2e2;color:#991b1b}.actions-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.back{background:none;color:var(--g);font-weight:700;margin-bottom:15px}.title{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:10px 0 20px}.title h2{margin:0;font-size:28px}.steps{display:flex;gap:7px;overflow:auto;margin-bottom:24px}.step{white-space:nowrap;background:#eef2f7;color:#64748b;padding:10px 13px;border-radius:12px;font-size:11px;font-weight:700}.step.on{background:var(--m);color:var(--g)}.step.done{background:#e0f2fe;color:#075985}.role-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:850px;margin:30px auto}.role-card{text-align:left;background:white;border:2px solid var(--line);border-radius:23px;padding:30px;transition:.2s}.role-card:hover{border-color:#86efac;transform:translateY(-2px)}.role-icon{font-size:48px}.role-card h3{font-size:24px;margin:12px 0}.lang{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.chip{padding:9px 13px;border-radius:99px;background:white;border:1px solid var(--line);font-size:12px;font-weight:700}.chip.on{background:var(--g);color:white}.banner{background:var(--p);border:1px solid #bbf7d0;border-radius:18px;padding:18px}.price{font-size:38px;font-weight:850;color:var(--g)}label{font-size:12px;font-weight:750;display:block;margin:0 0 7px}input,select,textarea{width:100%;padding:12px 13px;border:1px solid #cbd5e1;border-radius:11px;outline:none;background:white}input:focus,select:focus,textarea:focus{border-color:#22c55e;box-shadow:0 0 0 3px #dcfce7}.metric{padding:18px;background:white;border:1px solid var(--line);border-radius:16px}.metric small{color:var(--muted)}.metric b{display:block;font-size:22px;margin-top:5px}.tools{display:grid;grid-template-columns:1fr auto auto;gap:9px;margin-bottom:15px}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.prod{padding:0;overflow:hidden}.pic{height:140px;background:linear-gradient(135deg,#dcfce7,#f7fee7);display:grid;place-items:center;font-size:65px}.prod-body{padding:16px}.verified{font-size:9px;padding:5px 7px;border-radius:99px;background:#dcfce7;color:#166534;font-weight:800}.prod-top{display:flex;justify-content:space-between}.muted{color:var(--muted);font-size:12px}.prod-foot{display:flex;justify-content:space-between;align-items:center;margin-top:13px}.smallprice{font-size:20px;font-weight:850}.cartrow{display:grid;grid-template-columns:65px 1fr auto auto;gap:13px;align-items:center;padding:15px 0;border-bottom:1px solid var(--line)}.thumb{width:65px;height:65px;border-radius:14px;background:var(--p);display:grid;place-items:center;font-size:32px}.qty{display:flex;align-items:center;gap:9px}.qty button{width:30px;height:30px;border-radius:8px;background:#eef2f7;font-weight:900}.summaryline{display:flex;justify-content:space-between;margin:12px 0;color:#475569}.total{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px;font-size:20px;font-weight:850}.payment{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.pay{padding:15px;border:2px solid var(--line);border-radius:14px;background:white;text-align:center}.pay.on{border-color:#22c55e;background:var(--p)}.timeline{padding-left:35px;position:relative}.timeline:before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:#bbf7d0}.ti{position:relative;margin-bottom:24px}.dot{position:absolute;left:-33px;width:23px;height:23px;border-radius:50%;background:#e2e8f0;border:5px solid white;box-shadow:0 0 0 1px #cbd5e1}.ti.done .dot{background:#22c55e}.ti h4{margin:0 0 4px}.success{text-align:center;max-width:620px;margin:40px auto}.check{width:90px;height:90px;border-radius:50%;background:var(--m);color:var(--g2);display:grid;place-items:center;font-size:50px;margin:auto}.voice{position:fixed;right:18px;bottom:18px;width:min(390px,calc(100vw - 36px));background:white;border:1px solid #bbf7d0;border-radius:23px;padding:18px;box-shadow:0 25px 70px #0f172a38;z-index:50}.hidden{display:none}.voicehead{display:flex;justify-content:space-between}.voice small{display:block;color:var(--g);margin-top:3px}.trans{background:#f8fafc;padding:12px;border-radius:12px;min-height:48px;margin:12px 0;font-size:13px}.mic{width:100%;padding:14px;background:var(--g);color:white;border-radius:12px;font-weight:800}.hint{font-size:11px;color:var(--muted);line-height:1.6}.modal{position:fixed;inset:0;background:#0f172a99;z-index:40;padding:20px}.modal .card{max-width:500px;margin:8vh auto}.toast{position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);opacity:0;background:#0f172a;color:white;padding:11px 16px;border-radius:12px;z-index:100;transition:.2s;font-size:12px}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:800px){.hero,.two,.role-grid{grid-template-columns:1fr}.three,.products{grid-template-columns:1fr 1fr}.tools{grid-template-columns:1fr}.payment{grid-template-columns:1fr}.cartrow{grid-template-columns:55px 1fr}.cartrow>.qty,.cartrow>.remove{grid-column:2}.summary{margin-top:10px}}@media(max-width:500px){.three,.products{grid-template-columns:1fr}.role-grid{margin:15px 0}.hero h1{font-size:43px}}
+</style>
+</head>
+<body>
+<header class="top">
+<div class="brand" onclick="home()"><div class="logo">🌾</div><div><b>Farm Direct <span>AI</span></b><div class="sub">Farm to Fam</div></div></div>
+<div class="actions"><button class="icon" onclick="toggleVoice()">🎙️</button><span class="role" id="role">Guest</span></div>
+</header>
+<main id="app"></main>
+<div id="voice" class="voice hidden">
+<div class="voicehead"><div><b id="vtitle">Voice Assistant</b><small id="vlang"></small></div><button class="icon" onclick="toggleVoice()">×</button></div>
+<div class="trans" id="trans">Tap the microphone and speak.</div><button class="mic" id="mic" onclick="listen()">🎙️ Speak</button>
+<div class="hint" id="hint"></div>
+</div>
+<div id="modal"></div><div id="toast" class="toast"></div>
+
+<script>
+const API="http://127.0.0.1:8000";
+const T={
+en:{n:"English",code:"en-IN",welcome:"Welcome to Farm Direct AI",tag:"A direct digital marketplace connecting farmers with consumers.",farmer:"Farmer",consumer:"Consumer",fd:"List your harvest, get AI price guidance and receive direct orders.",cd:"Discover fresh produce directly from verified farmers.",cont:"Continue",back:"Back",name:"Full Name",phone:"Phone Number",loc:"Village / Location",crop:"Crop",qty:"Quantity (kg)",register:"Register & Continue",listing:"Product Listing",ai:"AI Based Demand & Price Suggestion",fair:"AI Fair Price",earn:"Estimated Earnings",demand:"Demand",publish:"Publish to Marketplace",market:"Fresh Produce Marketplace",search:"Search produce or farmer...",all:"All",add:"Add to Cart",cart:"Cart",empty:"Your cart is empty.",sub:"Subtotal",delivery:"Delivery",total:"Total",checkout:"Proceed to Checkout",address:"Delivery Address",slot:"Delivery Slot",payment:"Secure Demo Payment",upi:"UPI",card:"Card",cod:"Cash on Delivery",pay:"Pay",confirm:"Confirm Order",demo:"DEMO — No real money is charged.",success:"Order Confirmed!",track:"Track Order",tracking:"Logistics & Delivery Tracking",confirmed:"Order Confirmed",packed:"Farmer Packed",driver:"Driver Assigned",out:"Out for Delivery",delivered:"Delivered",route:"AI Route Optimization",eta:"Estimated delivery",orders:"Orders",dashboard:"Farmer Dashboard",my:"My Products",change:"Change Role",voice:"Voice Assistant",speak:"Speak",listening:"Listening…",hints:"Try: “I want to sell tomatoes”, “Show my cart”, “Add tomatoes”, or “Go to orders”."},
+kn:{n:"ಕನ್ನಡ",code:"kn-IN",welcome:"Farm Direct AI ಗೆ ಸ್ವಾಗತ",tag:"ರೈತರು ಮತ್ತು ಗ್ರಾಹಕರನ್ನು ನೇರವಾಗಿ ಸಂಪರ್ಕಿಸುವ ಡಿಜಿಟಲ್ ಮಾರುಕಟ್ಟೆ.",farmer:"ರೈತ",consumer:"ಗ್ರಾಹಕ",fd:"ನಿಮ್ಮ ಬೆಳೆ ಪಟ್ಟಿ ಮಾಡಿ, AI ಬೆಲೆ ಸಲಹೆ ಪಡೆಯಿರಿ ಮತ್ತು ನೇರ ಆರ್ಡರ್ ಪಡೆಯಿರಿ.",cd:"ಪರಿಶೀಲಿಸಿದ ರೈತರಿಂದ ನೇರವಾಗಿ ತಾಜಾ ಉತ್ಪನ್ನಗಳನ್ನು ಖರೀದಿಸಿ.",cont:"ಮುಂದುವರಿಸಿ",back:"ಹಿಂದೆ",name:"ಪೂರ್ಣ ಹೆಸರು",phone:"ಮೊಬೈಲ್ ಸಂಖ್ಯೆ",loc:"ಗ್ರಾಮ / ಸ್ಥಳ",crop:"ಬೆಳೆ",qty:"ಪ್ರಮಾಣ (ಕೆಜಿ)",register:"ನೋಂದಣಿ ಮುಂದುವರಿಸಿ",listing:"ಉತ್ಪನ್ನ ಪಟ್ಟಿ",ai:"AI ಬೇಡಿಕೆ ಮತ್ತು ಬೆಲೆ ಸಲಹೆ",fair:"AI ನ್ಯಾಯಯುತ ಬೆಲೆ",earn:"ಅಂದಾಜು ಆದಾಯ",demand:"ಬೇಡಿಕೆ",publish:"ಮಾರುಕಟ್ಟೆಗೆ ಪ್ರಕಟಿಸಿ",market:"ತಾಜಾ ಉತ್ಪನ್ನಗಳ ಮಾರುಕಟ್ಟೆ",search:"ಉತ್ಪನ್ನ ಅಥವಾ ರೈತರನ್ನು ಹುಡುಕಿ...",all:"ಎಲ್ಲಾ",add:"ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಿ",cart:"ಕಾರ್ಟ್",empty:"ನಿಮ್ಮ ಕಾರ್ಟ್ ಖಾಲಿಯಾಗಿದೆ.",sub:"ಉಪಮೊತ್ತ",delivery:"ವಿತರಣೆ",total:"ಒಟ್ಟು",checkout:"ಚೆಕ್‌ಔಟ್‌ಗೆ ಮುಂದುವರಿಸಿ",address:"ವಿತರಣಾ ವಿಳಾಸ",slot:"ವಿತರಣಾ ಸಮಯ",payment:"ಸುರಕ್ಷಿತ ಡೆಮೋ ಪಾವತಿ",upi:"UPI",card:"ಕಾರ್ಡ್",cod:"ಕ್ಯಾಶ್ ಆನ್ ಡೆಲಿವರಿ",pay:"ಪಾವತಿಸಿ",confirm:"ಆರ್ಡರ್ ದೃಢೀಕರಿಸಿ",demo:"ಡೆಮೋ — ನಿಜವಾದ ಹಣವನ್ನು ವಿಧಿಸಲಾಗುವುದಿಲ್ಲ.",success:"ಆರ್ಡರ್ ದೃಢೀಕರಿಸಲಾಗಿದೆ!",track:"ಆರ್ಡರ್ ಟ್ರ್ಯಾಕ್ ಮಾಡಿ",tracking:"ಲಾಜಿಸ್ಟಿಕ್ಸ್ ಮತ್ತು ಡೆಲಿವರಿ ಟ್ರ್ಯಾಕಿಂಗ್",confirmed:"ಆರ್ಡರ್ ದೃಢೀಕರಿಸಲಾಗಿದೆ",packed:"ರೈತರು ಪ್ಯಾಕ್ ಮಾಡಿದ್ದಾರೆ",driver:"ಚಾಲಕ ನಿಯೋಜಿಸಲಾಗಿದೆ",out:"ವಿತರಣೆಗೆ ಹೊರಟಿದೆ",delivered:"ವಿತರಿಸಲಾಗಿದೆ",route:"AI ಮಾರ್ಗ ಆಪ್ಟಿಮೈಸೇಶನ್",eta:"ಅಂದಾಜು ವಿತರಣೆ",orders:"ಆರ್ಡರ್‌ಗಳು",dashboard:"ರೈತ ಡ್ಯಾಶ್‌ಬೋರ್ಡ್",my:"ನನ್ನ ಉತ್ಪನ್ನಗಳು",change:"ಪಾತ್ರ ಬದಲಿಸಿ",voice:"ಧ್ವನಿ ಸಹಾಯಕ",speak:"ಮಾತನಾಡಿ",listening:"ಕೇಳಲಾಗುತ್ತಿದೆ…",hints:"“ಟೊಮೇಟೊ ಮಾರಬೇಕು”, “ನನ್ನ ಕಾರ್ಟ್ ತೋರಿಸಿ”, “ಟೊಮೇಟೊ ಸೇರಿಸಿ” ಅಥವಾ “ಆರ್ಡರ್‌ಗಳಿಗೆ ಹೋಗಿ” ಎಂದು ಹೇಳಿ."},
+hi:{n:"हिन्दी",code:"hi-IN",welcome:"Farm Direct AI में आपका स्वागत है",tag:"किसानों और ग्राहकों को सीधे जोड़ने वाला डिजिटल बाज़ार।",farmer:"किसान",consumer:"ग्राहक",fd:"अपनी फसल सूचीबद्ध करें, AI मूल्य सुझाव पाएं और सीधे ऑर्डर प्राप्त करें।",cd:"सत्यापित किसानों से सीधे ताज़ी उपज खरीदें।",cont:"जारी रखें",back:"वापस",name:"पूरा नाम",phone:"मोबाइल नंबर",loc:"गाँव / स्थान",crop:"फसल",qty:"मात्रा (किलो)",register:"पंजीकरण जारी रखें",listing:"उत्पाद सूची",ai:"AI मांग और मूल्य सुझाव",fair:"AI उचित मूल्य",earn:"अनुमानित कमाई",demand:"मांग",publish:"मार्केटप्लेस पर प्रकाशित करें",market:"ताज़ी उपज का बाज़ार",search:"उत्पाद या किसान खोजें...",all:"सभी",add:"कार्ट में जोड़ें",cart:"कार्ट",empty:"आपका कार्ट खाली है।",sub:"उप-योग",delivery:"डिलीवरी",total:"कुल",checkout:"चेकआउट पर जाएँ",address:"डिलीवरी पता",slot:"डिलीवरी समय",payment:"सुरक्षित डेमो भुगतान",upi:"UPI",card:"कार्ड",cod:"कैश ऑन डिलीवरी",pay:"भुगतान करें",confirm:"ऑर्डर की पुष्टि करें",demo:"डेमो — कोई वास्तविक पैसा नहीं लिया जाएगा।",success:"ऑर्डर की पुष्टि हो गई!",track:"ऑर्डर ट्रैक करें",tracking:"लॉजिस्टिक्स और डिलीवरी ट्रैकिंग",confirmed:"ऑर्डर की पुष्टि",packed:"किसान ने पैक किया",driver:"ड्राइवर नियुक्त",out:"डिलीवरी के लिए निकल गया",delivered:"डिलीवर हो गया",route:"AI रूट ऑप्टिमाइज़ेशन",eta:"अनुमानित डिलीवरी",orders:"ऑर्डर",dashboard:"किसान डैशबोर्ड",my:"मेरे उत्पाद",change:"भूमिका बदलें",voice:"वॉइस असिस्टेंट",speak:"बोलें",listening:"सुना जा रहा है…",hints:"कहें: “मुझे टमाटर बेचने हैं”, “मेरा कार्ट दिखाओ”, “टमाटर जोड़ो” या “ऑर्डर पर जाओ”।"}
+};
+const crops={Tomato:["🍅","Vegetables",32],Onion:["🧅","Vegetables",24],Rice:["🌾","Grains",41],Potato:["🥔","Vegetables",28],Carrot:["🥕","Vegetables",36],Banana:["🍌","Fruits",44]};
+const demo=[
+{id:"1",farmer:"Ramesh Kumar",crop:"Tomato",quantity:120,price:32,loc:"Kolar"},
+{id:"2",farmer:"Lakshmi Devi",crop:"Onion",quantity:180,price:24,loc:"Chikkaballapur"},
+{id:"3",farmer:"Suresh Gowda",crop:"Rice",quantity:250,price:41,loc:"Mandya"},
+{id:"4",farmer:"Anitha M.",crop:"Potato",quantity:150,price:28,loc:"Hassan"},
+{id:"5",farmer:"Manjunath",crop:"Carrot",quantity:90,price:36,loc:"Mysuru"},
+{id:"6",farmer:"Geetha R.",crop:"Banana",quantity:110,price:44,loc:"Chamarajanagar"}];
+let s=JSON.parse(localStorage.getItem("fda")||"null")||{lang:"en",role:null,screen:"welcome",farmer:null,products:[],cart:[],order:null,ai:null,pay:"upi",address:""};
+const save=()=>localStorage.setItem("fda",JSON.stringify(s)), t=k=>T[s.lang][k]||T.en[k]||k, esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])), money=x=>"₹"+Number(x||0).toLocaleString("en-IN"), products=()=>[...demo,...s.products];
+function screen(x){s.screen=x;save();render();scrollTo(0,0)}
+function home(){screen(s.role==="consumer"?"consumer":s.role==="farmer"?"dash":"welcome")}
+function lang(x){s.lang=x;save();render()}
+function toast(x){let e=document.getElementById("toast");e.textContent=x;e.classList.add("show");setTimeout(()=>e.classList.remove("show"),2200)}
+function render(){document.getElementById("role").textContent=s.role?t(s.role):"Guest";let f={welcome,roles,register,listing,ai,consumer,cart,checkout,payment,success,tracking,dash,farmerOrders};document.getElementById("app").innerHTML=(f[s.screen]||welcome)();voiceUI()}
+function welcome(){return `<section class="hero"><div><span class="chip on">🌱 Smart Automation & Agriculture</span><h1>${t("welcome").replace("AI","<span>AI</span>")}</h1><p>${t("tag")}</p><div class="actions-row"><button class="btn primary" onclick="screen('roles')">${t("cont")} →</button><button class="btn light" onclick="toggleVoice()">🎙️ ${t("voice")}</button></div><div class="lang"><button class="chip ${s.lang==="en"?"on":""}" onclick="lang('en')">English</button><button class="chip ${s.lang==="kn"?"on":""}" onclick="lang('kn')">ಕನ್ನಡ</button><button class="chip ${s.lang==="hi"?"on":""}" onclick="lang('hi')">हिन्दी</button></div></div><div class="hero-card"><div><div style="font-size:72px">🌾</div><h2>Direct • Fair • Transparent</h2><p>AI price guidance, direct orders, smart logistics and secure demo settlement.</p></div><div class="stats"><div class="stat"><b>AI</b>Fair pricing</div><div class="stat"><b>0</b>Middlemen</div><div class="stat"><b>Live</b>Tracking</div><div class="stat"><b>Voice</b>Multilingual</div></div></div></section><div class="card"><b>🎙️ ${t("voice")}</b><p class="muted">${t("hints")}</p></div>`}
+function roles(){return `<button class="back" onclick="screen('welcome')">← ${t("back")}</button><div class="title"><div><h2>Choose your role</h2><p>Use the platform as a farmer or consumer.</p></div></div><div class="role-grid"><button class="role-card" onclick="choose('farmer')"><div class="role-icon">👨‍🌾</div><h3>${t("farmer")}</h3><p>${t("fd")}</p><span class="btn primary">${t("cont")} →</span></button><button class="role-card" onclick="choose('consumer')"><div class="role-icon">🛒</div><h3>${t("consumer")}</h3><p>${t("cd")}</p><span class="btn dark">${t("cont")} →</span></button></div>`}
+function choose(r){s.role=r;screen(r==="farmer"?"register":"consumer")}
+function register(){return `<button class="back" onclick="screen('roles')">← ${t("back")}</button><div class="steps"><span class="step on">1. ${t("farmer")}</span><span class="step">2. ${t("listing")}</span><span class="step">3. AI</span><span class="step">4. ${t("orders")}</span><span class="step">5. Logistics</span><span class="step">6. Payment</span></div><div class="card"><div class="title"><div><h2>${t("farmer")} Registration & Verification</h2><p>Verified profile for transparent direct trade.</p></div><button class="icon" onclick="toggleVoice()">🎙️</button></div><div class="grid two"><div><label>${t("name")}</label><input id="fname"></div><div><label>${t("phone")}</label><input id="fphone" inputmode="numeric"></div><div><label>${t("loc")}</label><input id="floc"></div><div><label>Verification</label><select><option>Verified by Farm Direct AI</option><option>FPO Verified</option></select></div></div><div class="banner" style="margin-top:18px">✓ Verified farmer profile • Voice-first assistance available</div><div class="actions-row"><button class="btn primary" onclick="saveFarmer()">${t("register")} →</button></div></div>`}
+function saveFarmer(){let n=document.getElementById("fname").value.trim(),l=document.getElementById("floc").value.trim();if(!n||!l){toast("Please fill name and location.");return}s.farmer={name:n,phone:document.getElementById("fphone").value,loc:l};screen("listing")}
+function listing(){let a=s.ai||{};return `<button class="back" onclick="screen('register')">← ${t("back")}</button><div class="steps"><span class="step done">✓ ${t("farmer")}</span><span class="step on">2. ${t("listing")}</span><span class="step">3. AI</span><span class="step">4. ${t("orders")}</span><span class="step">5. Logistics</span><span class="step">6. Payment</span></div><div class="card"><div class="title"><div><h2>${t("listing")}</h2><p>Enter your crop, quantity and location.</p></div><button class="icon" onclick="toggleVoice()">🎙️</button></div><div class="grid two"><div><label>${t("crop")}</label><select id="crop">${Object.keys(crops).map(c=>`<option ${a.crop===c?"selected":""}>${c}</option>`).join("")}</select></div><div><label>${t("qty")}</label><input id="q" type="number" min="1" value="${a.qty||50}"></div><div><label>Quality</label><select><option>Grade A • Fresh</option><option>Grade B • Good</option></select></div><div><label>${t("loc")}</label><input id="ploc" value="${esc(s.farmer?.loc||"")}"></div></div><div class="actions-row"><button class="btn primary" onclick="runAI()">${t("cont")} → AI</button></div></div>`}
+async function runAI(){let crop=document.getElementById("crop").value,q=+document.getElementById("q").value;if(q<1){toast("Enter valid quantity");return}let price=crops[crop][2];try{let r=await fetch(API+"/predict",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({farmer:s.farmer.name,crop,quantity:q})});if(r.ok)price=+(await r.json()).fair_price||price}catch(e){}s.ai={crop,qty:q,price,loc:document.getElementById("ploc").value};screen("ai")}
+function ai(){let a=s.ai;return `<button class="back" onclick="screen('listing')">← ${t("back")}</button><div class="steps"><span class="step done">✓ 1</span><span class="step done">✓ 2</span><span class="step on">3. AI</span><span class="step">4. ${t("orders")}</span><span class="step">5. Logistics</span><span class="step">6. Payment</span></div><div class="banner"><div class="title"><div><h2>${t("ai")}</h2><p>Demo AI market recommendation based on crop and quantity.</p></div><span style="font-size:50px">${crops[a.crop][0]}</span></div><div class="grid three"><div class="metric"><small>${t("fair")}</small><b>${money(a.price)}/kg</b></div><div class="metric"><small>${t("demand")}</small><b>High</b></div><div class="metric"><small>${t("earn")}</small><b>${money(a.price*a.qty)}</b></div></div><div class="actions-row"><button class="btn primary" onclick="publish()">${t("publish")}</button></div></div>`}
+async function publish(){let a=s.ai,p={id:"p"+Date.now(),farmer:s.farmer.name,crop:a.crop,quantity:a.qty,price:a.price,loc:a.loc||s.farmer.loc};s.products.push(p);try{await fetch(API+"/upload",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({farmer:p.farmer,crop:p.crop,quantity:p.quantity})})}catch(e){}toast("Published");screen("dash")}
+function consumer(){
+    return `
+    <button class="back" onclick="screen('roles')">
+        ⇄ ${t("change")}
+    </button>
+
+    <div class="title">
+        <div>
+            <h2>${t("market")}</h2>
+            <p>Fresh produce directly from verified farmers.</p>
+        </div>
+
+        <button class="btn primary" onclick="screen('cart')">
+            🛒 ${t("cart")} (${count()})
+        </button>
+    </div>
+
+    <div class="tools">
+        <input
+            id="search"
+            oninput="filter()"
+            placeholder="${t("search")}"
+        >
+
+        <button class="btn light" onclick="toggleVoice()">
+            🎙️
+        </button>
+
+        <button class="btn light" onclick="screen('tracking')">
+            📦 ${t("orders")}
+        </button>
+    </div>
+
+    <div class="lang" style="margin-bottom:20px">
+        <button class="chip on" onclick="cat('All',this)">
+            ${t("all")}
+        </button>
+
+        <button class="chip" onclick="cat('Vegetables',this)">
+            🥕 Vegetables
+        </button>
+
+        <button class="chip" onclick="cat('Fruits',this)">
+            🍌 Fruits
+        </button>
+
+        <button class="chip" onclick="cat('Grains',this)">
+            🌾 Grains
+        </button>
+    </div>
+
+    <div id="pg" class="products">
+        ${cards(products())}
+    </div>
+    `;
+}
+function cards(ps){return ps.map(p=>`<article class="card prod"><div class="pic">${crops[p.crop]?.[0]||"🌾"}</div><div class="prod-body"><div class="prod-top"><div><b>${esc(p.crop)}</b><div class="muted">👨‍🌾 ${esc(p.farmer)}</div></div><span class="verified">✓ VERIFIED</span></div><div class="muted" style="margin-top:8px">${esc(p.loc||"Local farm")} • ${p.quantity} kg available</div><div class="prod-foot"><span class="smallprice">${money(p.price)}<small>/kg</small></span><button class="btn primary" onclick="openP('${p.id}')">${t("add")}</button></div></div></article>`).join("")||`<div class="card">No products found.</div>`}
+function filter(){let q=(document.getElementById("search").value||"").toLowerCase();document.getElementById("pg").innerHTML=cards(products().filter(p=>(p.crop+" "+p.farmer+" "+p.loc).toLowerCase().includes(q)))}
+function cat(c,e){document.querySelectorAll(".lang .chip").forEach(x=>x.classList.remove("on"));e.classList.add("on");document.getElementById("pg").innerHTML=cards(products().filter(p=>c==="All"||crops[p.crop][1]===c))}
+function openP(id){let p=products().find(x=>x.id===id);document.getElementById("modal").innerHTML=`<div class="modal" onclick="closeM()"><div class="card" onclick="event.stopPropagation()"><div style="font-size:75px;text-align:center">${crops[p.crop][0]}</div><h2>${p.crop}</h2><p>From ${p.farmer} • ${p.loc}</p><div class="price">${money(p.price)}/kg</div><label>Quantity (kg)</label><input id="mq" type="number" min="1" max="${p.quantity}" value="1" oninput="if(+this.value>${p.quantity})this.value=${p.quantity}"><div class="actions-row"><button class="btn primary" style="width:100%" onclick="add('${p.id}')">${t("add")}</button><button class="btn light" style="width:100%" onclick="closeM()">${t("back")}</button></div></div></div>`}
+function closeM(){document.getElementById("modal").innerHTML=""}
+function add(id){let p=products().find(x=>x.id===id),q=Math.max(1,+document.getElementById("mq").value||1),e=s.cart.find(x=>x.id===id);if(e)e.q=Math.min(e.q+q,p.quantity);else s.cart.push({id,q:Math.min(q,p.quantity)});save();closeM();toast("Added to cart");render()}
+function count(){return s.cart.reduce((a,x)=>a+x.q,0)}
+function data(){return s.cart.map(x=>({...x,p:products().find(y=>y.id===x.id)})).filter(x=>x.p)}
+function totals(){let sub=data().reduce((a,x)=>a+x.q*x.p.price,0);return{sub,del:sub?49:0,total:sub+(sub?49:0)}}
+function change(id,d){let x=s.cart.find(a=>a.id===id),p=products().find(a=>a.id===id);x.q=Math.max(0,Math.min(x.q+d,p.quantity));if(!x.q)s.cart=s.cart.filter(a=>a.id!==id);save();render()}
+function cart(){let ds=data(),z=totals();return `<button class="back" onclick="screen('consumer')">← ${t("back")}</button><div class="title"><h2>🛒 ${t("cart")}</h2></div>${ds.length?`<div class="grid two"><div class="card">${ds.map(x=>`<div class="cartrow"><div class="thumb">${crops[x.p.crop][0]}</div><div><b>${x.p.crop}</b><div class="muted">${x.p.farmer}</div><b>${money(x.p.price)}/kg</b></div><div class="qty"><button onclick="change('${x.id}',-1)">−</button><b>${x.q}</b><button onclick="change('${x.id}',1)">+</button></div><button class="btn danger remove" onclick="s.cart=s.cart.filter(a=>a.id!=='${x.id}');save();render()">Remove</button></div>`).join("")}<button class="btn light" onclick="screen('consumer')" style="margin-top:15px">← Continue Shopping</button></div><div class="card summary"><h3>Order Summary</h3><div class="summaryline"><span>${t("sub")}</span><b>${money(z.sub)}</b></div><div class="summaryline"><span>${t("delivery")}</span><b>${money(z.del)}</b></div><div class="total"><span>${t("total")}</span><span>${money(z.total)}</span></div><button class="btn primary" style="width:100%;margin-top:18px" onclick="screen('checkout')">${t("checkout")}</button></div></div>`:`<div class="card" style="text-align:center"><div style="font-size:65px">🛒</div><h2>${t("empty")}</h2><button class="btn primary" onclick="screen('consumer')">Browse Marketplace</button></div>`}`}
+function checkout(){let z=totals();return `<button class="back" onclick="screen('cart')">← ${t("back")}</button><div class="title"><h2>Checkout</h2></div><div class="grid two"><div class="card"><label>${t("address")}</label><textarea id="addr" rows="5">${esc(s.address)}</textarea><label style="margin-top:15px">${t("slot")}</label><select id="slot"><option>Tomorrow • 9 AM – 12 PM</option><option>Tomorrow • 2 PM – 5 PM</option></select><button class="btn primary" style="width:100%;margin-top:18px" onclick="toPay()">${t("payment")} →</button></div><div class="card"><h3>Order Summary</h3>${data().map(x=>`<div class="summaryline"><span>${x.p.crop} × ${x.q}</span><b>${money(x.q*x.p.price)}</b></div>`).join("")}<div class="total"><span>${t("total")}</span><span>${money(z.total)}</span></div></div></div>`}
+function toPay(){s.address=document.getElementById("addr").value.trim();if(!s.address){toast("Enter delivery address");return}save();screen("payment")}
+function payment(){let z=totals();return `<button class="back" onclick="screen('checkout')">← ${t("back")}</button><div class="title"><div><h2>💳 ${t("payment")}</h2><p>${t("demo")}</p></div></div><div class="card"><div class="payment">${[["upi","📱",t("upi")],["card","💳",t("card")],["cod","💵",t("cod")]].map(x=>`<button class="pay ${s.pay===x[0]?"on":""}" onclick="s.pay='${x[0]}';save();render()">${x[1]}<br><b>${x[2]}</b></button>`).join("")}</div><div style="margin-top:22px">${s.pay==="upi"?`<div class="banner"><h3>UPI Demo</h3><p>Enter any demo ID such as farmer@upi.</p><input placeholder="yourname@upi"><div style="font-size:65px;text-align:center">▦</div></div>`:s.pay==="card"?`<div class="grid two"><div style="grid-column:1/-1"><label>Card Number</label><input placeholder="4111 1111 1111 1111"></div><div><label>Expiry</label><input placeholder="MM/YY"></div><div><label>CVV</label><input placeholder="123" type="password"></div></div>`:`<div class="banner"><h3>Cash on Delivery</h3><p>Pay the delivery partner when your order arrives.</p></div>`}</div><div class="total" style="margin-top:20px"><span>${t("total")}</span><span>${money(z.total)}</span></div><button class="btn primary" style="width:100%;margin-top:18px" onclick="complete()">${s.pay==="cod"?t("confirm"):t("pay")+" "+money(z.total)}</button></div>`}
+function complete(){s.order={id:"FD-"+Date.now().toString().slice(-8),items:data(),total:totals().total,address:s.address,status:0,pay:s.pay};s.cart=[];save();screen("success")}
+function success(){return `<section class="success"><div class="check">✓</div><h1>${t("success")}</h1><p>${s.pay==="cod"?"Cash on Delivery order placed.":t("demo")}</p><div class="card"><div style="padding:13px;background:#f8fafc;border-radius:12px;font-weight:800">${s.order.id}</div><div class="summaryline"><span>Amount</span><b>${money(s.order.total)}</b></div><div class="summaryline"><span>Payment</span><b>${s.order.pay.toUpperCase()}</b></div></div><div class="actions-row" style="justify-content:center"><button class="btn primary" onclick="screen('tracking')">${t("track")} →</button><button class="btn light" onclick="screen('consumer')">Marketplace</button></div></section>`}
+function tracking(){let a=s.order?.status||0,st=[t("confirmed"),t("packed"),t("driver"),t("out"),t("delivered")];return `<button class="back" onclick="home()">← ${t("back")}</button><div class="title"><div><h2>📦 ${t("tracking")}</h2><p>${s.order?.id||"FD-DEMO"}</p></div></div><div class="grid two"><div class="card"><div class="timeline">${st.map((x,i)=>`<div class="ti ${i<=a?"done":""}"><div class="dot"></div><h4>${x}</h4><p class="muted">${i===0?"Order recorded":i===1?"Produce prepared by farmer":i===2?"Smart logistics partner assigned":i===3?"Shipment on the way":"Delivered to consumer"}</p></div>`).join("")}</div><button class="btn primary" style="width:100%" onclick="advance()">${a<4?"Simulate Next Update":"Completed ✓"}</button></div><div class="hero-card" style="min-height:300px"><h3>🗺️ ${t("route")}</h3><p>Nearest farmer → consolidation point → consumer. Demo route prioritizes shorter distance and lower logistics cost.</p><div style="height:130px;border-radius:15px;background:#1e293b;position:relative"><div style="position:absolute;left:20%;top:65%;right:18%;height:3px;background:#86efac;transform:rotate(-20deg)"></div></div><div class="summaryline" style="color:white"><span>${t("eta")}</span><b>${a>=4?t("delivered"):"Today • 35–55 min"}</b></div></div></div>`}
+function advance(){if(s.order)s.order.status=Math.min(4,(s.order.status||0)+1);save();render()}
+function dash(){return `<div class="title"><div><h2>👨‍🌾 ${t("dashboard")}</h2><p>Welcome, ${esc(s.farmer?.name||"Farmer")} • ✓ Verified</p></div><button class="btn light" onclick="screen('farmerOrders')">📦 ${t("orders")}</button></div><div class="grid three"><div class="metric"><small>Listed Products</small><b>${s.products.length}</b></div><div class="metric"><small>Potential Earnings</small><b>${money(s.products.reduce((a,p)=>a+p.price*p.quantity,0))}</b></div><div class="metric"><small>Trust</small><b>Verified ✓</b></div></div><div class="title" style="margin-top:30px"><h2>${t("my")}</h2><button class="btn primary" onclick="screen('listing')">+ Add Harvest</button></div><div class="grid two">${s.products.map(p=>`<div class="card"><b>${crops[p.crop][0]} ${p.crop}</b><p class="muted">${p.quantity} kg • ${money(p.price)}/kg • ${p.loc}</p></div>`).join("")||`<div class="card">No products yet.</div>`}</div><div class="actions-row"><button class="btn light" onclick="s.role=null;s.farmer=null;save();screen('roles')">${t("change")}</button></div>`}
+function farmerOrders(){return `<button class="back" onclick="screen('dash')">← ${t("back")}</button><div class="title"><h2>📦 ${t("orders")}</h2></div><div class="card">${s.order?`<b>${s.order.id}</b><p class="muted">${s.order.items.map(x=>x.p.crop+" × "+x.q+"kg").join(", ")}</p><span class="verified">Direct Consumer Order</span>`:`<p>No orders yet.</p>`}</div>`}
+function toggleVoice(){document.getElementById("voice").classList.toggle("hidden");voiceUI()}
+function voiceUI(){let v=document.getElementById("voice");if(!v)return;document.getElementById("vtitle").textContent=t("voice");document.getElementById("vlang").textContent=T[s.lang].n+" • "+T[s.lang].code;document.getElementById("mic").textContent="🎙️ "+t("speak");document.getElementById("hint").textContent=t("hints")}
+function speak(x){if(!("speechSynthesis" in window))return;speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(x);u.lang=T[s.lang].code;u.rate=.9;speechSynthesis.speak(u)}
+function listen(){let R=window.SpeechRecognition||window.webkitSpeechRecognition;if(!R){toast("Use Google Chrome for voice recognition.");return}let r=new R();r.lang=T[s.lang].code;r.interimResults=false;r.continuous=false;document.getElementById("mic").textContent="🎙️ "+t("listening");r.onresult=e=>{let x=e.results[0][0].transcript;document.getElementById("trans").textContent=x;command(x)};r.onerror=()=>{document.getElementById("mic").textContent="🎙️ "+t("speak")};r.onend=()=>{document.getElementById("mic").textContent="🎙️ "+t("speak")};r.start()}
+function command(raw){let x=raw.toLowerCase(),resp="";if((x.includes("sell")||x.includes("बेचना")||x.includes("ಮಾರ"))&&s.role==="farmer"){s.screen="listing";resp=s.lang==="kn"?"ಸರಿ. ನಿಮ್ಮ ಬೆಳೆ ವಿವರಗಳನ್ನು ನಮೂದಿಸಿ.":s.lang==="hi"?"ठीक है। अपनी फसल का विवरण भरें।":"Sure. Let's add your harvest."}else if(x.includes("cart")||x.includes("कार्ट")||x.includes("ಕಾರ್ಟ್")){s.screen="cart";resp=s.lang==="kn"?"ನಿಮ್ಮ ಕಾರ್ಟ್ ತೆರೆಯುತ್ತಿದ್ದೇನೆ.":s.lang==="hi"?"आपका कार्ट खोल रही हूँ।":"Opening your cart."}else if(x.includes("order")||x.includes("ऑर्डर")||x.includes("ಆರ್ಡರ್")){s.screen="tracking";resp=s.lang==="kn"?"ಆರ್ಡರ್ ಟ್ರ್ಯಾಕಿಂಗ್ ತೆರೆಯುತ್ತಿದ್ದೇನೆ.":s.lang==="hi"?"ऑर्डर ट्रैकिंग खोल रही हूँ।":"Opening order tracking."}else if(x.includes("tomato")||x.includes("टमाटर")||x.includes("ಟೊಮೇಟೊ")){if(s.screen==="consumer"){let p=products().find(p=>p.crop==="Tomato");if(p)addDirect(p.id);resp=s.lang==="kn"?"ಟೊಮೇಟೊ ಕಾರ್ಟ್‌ಗೆ ಸೇರಿಸಲಾಗಿದೆ.":s.lang==="hi"?"टमाटर कार्ट में जोड़ दिया है।":"Tomatoes added to your cart."}else if(s.screen==="listing"){document.getElementById("crop").value="Tomato";resp=s.lang==="kn"?"ಟೊಮೇಟೊ ಆಯ್ಕೆ ಮಾಡಲಾಗಿದೆ.":s.lang==="hi"?"टमाटर चुना गया है।":"Tomato selected."}}else{resp=s.lang==="kn"?"ಮಾರುಕಟ್ಟೆ, ಕಾರ್ಟ್, ಆರ್ಡರ್ ಅಥವಾ ಮಾರಾಟ ಎಂದು ಹೇಳಿ.":s.lang==="hi"?"मार्केट, कार्ट, ऑर्डर या बेचें कहें।":"Say marketplace, cart, order, or sell."}save();render();speak(resp)}
+function addDirect(id){let e=s.cart.find(x=>x.id===id);if(e)e.q++;else s.cart.push({id,q:1});save()}
+
+/* ===== FARMER INVENTORY + LIVE STOCK UPDATE ===== */
+function inventoryTotal(){
+    return s.products.reduce((a,p)=>a+(Number(p.quantity)||0),0);
+}
+function updateStock(id, delta){
+    const p=s.products.find(x=>x.id===id);
+    if(!p) return;
+    const next=Math.max(0,(Number(p.quantity)||0)+delta);
+    if(next===0){
+        if(confirm("This will make the product unavailable. Continue?")){
+            p.quantity=0;
+        }else return;
+    }else{
+        p.quantity=next;
+    }
+    save();
+    toast("Available harvest updated");
+    render();
+}
+function setStock(id){
+    const p=s.products.find(x=>x.id===id);
+    if(!p) return;
+    const value=prompt("Enter the new available harvest quantity (kg):",p.quantity);
+    if(value===null) return;
+    const n=Number(value);
+    if(!Number.isFinite(n)||n<0){
+        toast("Enter a valid quantity");
+        return;
+    }
+    p.quantity=Math.floor(n);
+    save();
+    toast("Harvest quantity updated");
+    render();
+}
+function removeProduct(id){
+    const p=s.products.find(x=>x.id===id);
+    if(!p) return;
+    if(confirm("Remove "+p.crop+" from your marketplace?")){
+        s.products=s.products.filter(x=>x.id!==id);
+        save();
+        toast("Product removed from marketplace");
+        render();
+    }
+}
+
+/* Replace farmer dashboard with real inventory controls */
+function dash(){
+    const rows=s.products.map(p=>{
+        const available=Number(p.quantity)||0;
+        return `<div class="card" style="padding:0;overflow:hidden">
+            <div style="display:flex;gap:15px;padding:18px;align-items:center">
+                <div class="thumb" style="width:75px;height:75px;font-size:40px">${crops[p.crop]?.[0]||"🌾"}</div>
+                <div style="flex:1">
+                    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+                        <h3 style="margin:0">${crops[p.crop]?.[0]||"🌾"} ${esc(p.crop)}</h3>
+                        <span class="verified">✓ LIVE LISTING</span>
+                    </div>
+                    <p class="muted" style="margin:5px 0">${money(p.price)}/kg • ${esc(p.loc||s.farmer?.loc||"Local farm")}</p>
+                    <b style="font-size:18px">${available} kg available</b>
+                </div>
+            </div>
+            <div style="display:flex;gap:8px;align-items:center;padding:0 18px 18px;flex-wrap:wrap">
+                <button class="btn light" onclick="updateStock('${p.id}',-10)">− 10 kg</button>
+                <button class="btn light" onclick="updateStock('${p.id}',-1)">− 1 kg</button>
+                <div style="padding:10px 14px;background:#f8fafc;border-radius:10px;font-weight:800;min-width:90px;text-align:center">${available} kg</div>
+                <button class="btn light" onclick="updateStock('${p.id}',1)">+ 1 kg</button>
+                <button class="btn primary" onclick="updateStock('${p.id}',10)">+ 10 kg</button>
+                <button class="btn light" onclick="setStock('${p.id}')">✏️ Edit</button>
+                <button class="btn danger" onclick="removeProduct('${p.id}')">Remove</button>
+            </div>
+            ${available===0?`<div style="background:#fee2e2;color:#991b1b;padding:10px 18px;font-size:12px;font-weight:700">OUT OF STOCK — hidden from consumers</div>`:""}
+        </div>`;
+    }).join("");
+
+    return `<div class="title">
+        <div>
+            <h2>👨‍🌾 ${t("dashboard")}</h2>
+            <p>Welcome, ${esc(s.farmer?.name||"Farmer")} • ✓ Verified</p>
+        </div>
+        <button class="btn light" onclick="screen('farmerOrders')">📦 ${t("orders")}</button>
+    </div>
+
+    <div class="grid three">
+        <div class="metric"><small>Active Listings</small><b>${s.products.filter(p=>Number(p.quantity)>0).length}</b></div>
+        <div class="metric"><small>Total Available Harvest</small><b>${inventoryTotal()} kg</b></div>
+        <div class="metric"><small>Potential Earnings</small><b>${money(s.products.reduce((a,p)=>a+(Number(p.quantity)||0)*(Number(p.price)||0),0))}</b></div>
+    </div>
+
+    <div class="banner" style="margin-top:22px">
+        <b>🌱 Harvest Inventory</b>
+        <p style="margin:5px 0 0">Increase or decrease your available harvest anytime. Consumers see the updated quantity automatically.</p>
+    </div>
+
+    <div class="title" style="margin-top:30px">
+        <h2>${t("my")}</h2>
+        <button class="btn primary" onclick="screen('listing')">+ Add Harvest</button>
+    </div>
+
+    <div class="grid">${rows||`<div class="card" style="text-align:center"><div style="font-size:55px">🌾</div><h3>No harvest listed yet</h3><button class="btn primary" onclick="screen('listing')">List Harvest</button></div>`}</div>
+
+    <div class="actions-row">
+        <button class="btn light" onclick="s.role=null;s.farmer=null;save();screen('roles')">${t("change")}</button>
+    </div>`;
+}
+
+/* Only farmer-created listings can have live stock changed.
+   Consumer purchases reduce that farmer listing's quantity. */
+function complete(){
+    const purchased=data();
+    s.order={
+        id:"FD-"+Date.now().toString().slice(-8),
+        items:purchased,
+        total:totals().total,
+        address:s.address,
+        status:0,
+        pay:s.pay
+    };
+
+    purchased.forEach(item=>{
+        const farmerProduct=s.products.find(p=>String(p.id)===String(item.id));
+        if(farmerProduct){
+            farmerProduct.quantity=Math.max(0,(Number(farmerProduct.quantity)||0)-item.q);
+        }
+    });
+
+    s.cart=[];
+    save();
+    screen("success");
+}
+
+/* Hide zero-stock products from consumer marketplace */
+function cards(ps){
+    const available=ps.filter(p=>Number(p.quantity)>0);
+    return available.map(p=>`<article class="card prod">
+        <div class="pic">${crops[p.crop]?.[0]||"🌾"}</div>
+        <div class="prod-body">
+            <div class="prod-top">
+                <div><b>${esc(p.crop)}</b><div class="muted">👨‍🌾 ${esc(p.farmer)}</div></div>
+                <span class="verified">✓ VERIFIED</span>
+            </div>
+            <div class="muted" style="margin-top:8px">${esc(p.loc||"Local farm")} • ${p.quantity} kg available</div>
+            <div class="prod-foot">
+                <span class="smallprice">${money(p.price)}<small>/kg</small></span>
+                <button class="btn primary" onclick="openP('${p.id}')">${t("add")}</button>
+            </div>
+        </div>
+    </article>`).join("")||`<div class="card" style="grid-column:1/-1;text-align:center"><div style="font-size:45px">🌾</div><h3>No harvest available right now</h3><p>Farmers will appear here when fresh stock is listed.</p></div>`;
+}
+
+/* Never allow a consumer to add more than current farmer stock */
+function add(id){
+    const p=products().find(x=>String(x.id)===String(id));
+    if(!p || Number(p.quantity)<=0){toast("This harvest is out of stock");closeM();return}
+    const input=document.getElementById("mq");
+    const q=Math.max(1,Math.floor(Number(input?.value)||1));
+    const existing=s.cart.find(x=>String(x.id)===String(id));
+    const already=existing?existing.q:0;
+    if(already+q>Number(p.quantity)){
+        toast("Only "+p.quantity+" kg is available");
+        return;
+    }
+    if(existing) existing.q+=q;
+    else s.cart.push({id:p.id,q});
+    save();closeM();toast("Added to cart");render();
+}
+
+render();
+</script>
+</body>
+</html>
