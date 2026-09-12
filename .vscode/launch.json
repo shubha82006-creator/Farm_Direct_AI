@@ -1,0 +1,44 @@
+﻿{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Farm Direct AI: Run Server & Web App (F5)",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app:app",
+                "--reload",
+                "--host",
+                "127.0.0.1",
+                "--port",
+                "8000"
+            ],
+            "cwd": "${workspaceFolder}/backend",
+            "jinja": true,
+            "justMyCode": true,
+            "serverReadyAction": {
+                "pattern": "Uvicorn running on http://([a-zA-Z0-9.-]+):([0-9]+)",
+                "uriFormat": "http://%s:%s",
+                "action": "openExternally"
+            }
+        },
+        {
+            "name": "Farm Direct AI: Run Server (Legacy Python)",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "app:app",
+                "--reload",
+                "--host",
+                "127.0.0.1",
+                "--port",
+                "8000"
+            ],
+            "cwd": "${workspaceFolder}/backend",
+            "jinja": true,
+            "justMyCode": true
+        }
+    ]
+}
